@@ -1,0 +1,16 @@
+﻿@using Lab7Razor.Models
+@model Teacher
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="panel-default">
+    <div class="panel-heading">
+        <h1>@Model.FirstName @Model.LastName - Описание</h1>
+    </div>
+    <div class="panel-body">
+        @Html.DisplayFor(m => m.Description)
+    </div>
+</div>
+

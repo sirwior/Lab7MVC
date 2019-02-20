@@ -1,0 +1,82 @@
+﻿@using Lab7Razor.Models;
+@model IEnumerable<Teacher>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1>Список учителей</h1>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Имя</th>
+                    <th>Фамилия</th>
+                    <th>Предмет</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int index = 0;
+                    foreach (var teacher in Model)
+                    {
+                        <tr>
+                            <td>@teacher.FirstName</td>
+                            <td>@teacher.LastName</td>
+                            <td>@teacher.Subject</td>
+                            <td>
+                                @Html.ActionLink("Удалить", "Delete", "Teacher", new { id = index }, null) |
+                                @Html.ActionLink("Детали", "Details", "Teacher", new { id = index }, null)
+                            </td>
+                        </tr>
+                        index++;
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1>Добавить учителя</h1>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm("Index", "Teacher", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            <div class="form-group">
+                <label for="fname" class="control-label col-sm-2">Введите Имя:</label>
+                <div class="col-sm-10">
+                    @Html.TextBox("fname", "", new { @class = "form-control", placeholder = "Введите Имя" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="lname" class="control-label col-sm-2">Введите Фамилию:</label>
+                <div class="col-sm-10">
+                    @Html.TextBox("lname", "", new { @class = "form-control", placeholder = "Введите Фамилию" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="subject" class="control-label col-sm-2">Введите Предмет:</label>
+                <div class="col-sm-10">
+                    @Html.TextBox("subject", "", new { @class = "form-control", placeholder = "Введите Предмет" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description" class="control-label col-sm-2">Введите Краткое Описание:</label>
+                <div class="col-sm-10">
+                    @Html.TextArea("description", new { @class = "form-control", placeholder = "Описание..." })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default">Отправить</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
